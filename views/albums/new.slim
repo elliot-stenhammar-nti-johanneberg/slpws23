@@ -1,0 +1,15 @@
+h1 Add new album
+form action="/albums" method="post"
+    input name="title" placeholder="Title" type="text" 
+    br
+    select#artists[name="artist"]
+        - artists.each do |artist| 
+            option[value="#{artist["id"]}"] #{artist["name"]}
+    input type="submit" value="Add" 
+    br
+    select#genres[name="genre"]
+        - genres.each do |genre| 
+            option[value="#{genre["id"]}"] #{genre["name"]}
+    input type="submit" value="Add" 
+    br
+    input type="submit" value="Submit" 
