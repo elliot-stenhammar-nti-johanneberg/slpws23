@@ -1,0 +1,5 @@
+Functionality:
+- Edit albums/artists/genres
+- Move code to model.rb
+- Login
+- Admin

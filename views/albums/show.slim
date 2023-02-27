@@ -1,0 +1,12 @@
+h1 #{@album["title"]}
+h2 Artist 
+a href="../artists/#{@album["artist_id"]}" #{@album["name"]}
+
+h2 Release year
+p
+    a href="../albums?start-year=#{@album['year']}&end-year=#{@album['year']}" #{@album["year"]}
+
+h2 Genres
+- @genres.each do |genre|
+    p 
+        a href="../albums?genres%5B%5D=#{genre['id']}" #{genre["name"]}
