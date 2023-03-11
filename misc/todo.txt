@@ -1,5 +1,5 @@
 Functionality:
-- Edit albums/artists/genres
-- Move code to model.rb
-- Login
-- Admin
+- Edit & Delete genres  
+
+General
+- Error handling/validation

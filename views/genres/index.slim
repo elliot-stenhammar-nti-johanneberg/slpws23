@@ -1,0 +1,22 @@
+h1 Genres
+
+ruby:
+    def self.render_genre(genre)
+        list = "<li><a href='../albums?genres%5B%5D=#{genre['id']}'>#{genre['name']}</a></li>"
+        subgenres = @genres.select { |g| g['parent_genre_id'] == genre['id'] }
+        if subgenres.any?
+            list += "<ul>"
+            subgenres.each do |subgenre|
+                list += render_genre(subgenre)
+            end
+            list += "</ul>"
+        end
+        list
+    end
+
+ul
+  - @genres.select { |genre| genre['parent_genre_id'].nil? }.each do |genre|
+    == render_genre(genre)
+
+- if !session[:user].nil? && session[:user]["permission"] >= 1
+    a.new href="genres/new" New genre

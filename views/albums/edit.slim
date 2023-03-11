@@ -1,0 +1,27 @@
+h1 Edit album
+form action="/albums/#{@album["id"]}/update" method="post"
+    input type="text" name="title" placeholder="Title" value=@album['title']
+    input type="number" name="year" min="1900" max="2023" step="1" value=@album['year']
+    
+    h2 Artist
+    select name="artist"
+        - @artists.each do |artist|
+            - if @album["artist_id"] == artist["id"]
+                option value=artist["id"] selected="selected" #{artist["name"]}
+            - else
+                option value=artist["id"] #{artist["name"]}
+
+    h2 Genres
+    select [name="genres[]" multiple]
+        - @genres.each do |genre| 
+            - if @album_genres.include?(genre)
+                option value=genre["id"] selected="selected" #{genre["name"]}
+            - else 
+                option value=genre["id"] #{genre["name"]}
+
+    br
+    br
+    input type="submit" value="Save changes"
+
+br
+== slim :"partials/delete-button", locals: {item: "album", id: @album["id"]}

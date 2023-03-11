@@ -1,0 +1,9 @@
+h1 Edit artist
+form action="/artists/#{@artist["id"]}/update" method="post"
+    input type="text" name="name" placeholder="Name" value=@artist['name']
+    br
+    br
+    input type="submit" value="Save changes"
+
+br
+== slim :"partials/delete-button", locals: {item: "artist", id: @artist["id"]}

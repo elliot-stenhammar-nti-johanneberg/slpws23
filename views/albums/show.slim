@@ -1,4 +1,9 @@
 h1 #{@album["title"]}
+form#rating-form action="/ratings#{@rating.nil? ? nil : '/' + @rating['id'].to_s + '/update'}" method="post"    
+    label My rating: 
+    input#rating-input type="number" name="rating" min="1" max="5" value="#{@rating.nil? ? '' : @rating['rating']}"
+    input type="hidden" name="album_id" value=@album["id"]
+
 h2 Artist 
 a href="../artists/#{@album["artist_id"]}" #{@album["name"]}
 
@@ -10,3 +15,12 @@ h2 Genres
 - @genres.each do |genre|
     p 
         a href="../albums?genres%5B%5D=#{genre['id']}" #{genre["name"]}
+
+== slim :"partials/edit-button", locals: {id: @album["id"]}
+
+javascript: 
+    const form = document.getElementById("rating-form")
+    const input = document.getElementById("rating-input")  
+    input.addEventListener("blur", () => {
+        form.submit()
+    })

@@ -1,6 +1,12 @@
 h1 Albums
 h2 Filter 
 form action="/albums" method="get"
+  label Sort by: 
+  select name="sort"
+    option [value="top" selected=(@sort == 'top')] Top
+    option [value="popular" selected=(@sort == 'popular')] Popular
+  br
+  br
   input type="number" name="start-year" value="#{@start_year.nil? ? "1900" : @start_year}" min="1900" max="2023"
   |  -  
   input type="number" name="end-year" value="#{@end_year.nil? ? "2023" : @end_year}" min="1900" max="2023" 
@@ -24,3 +30,9 @@ ol
   - @albums.each do |album|
     li 
         a href="albums/#{album["id"]}" #{album["title"]}
+
+- if !session[:user].nil? && session[:user]["permission"] >= 1
+    div.new
+      a href="albums/new" New album
+      |   |  
+      a href="artists/new" New artist

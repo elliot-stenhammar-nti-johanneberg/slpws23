@@ -4,5 +4,5 @@ form action="/login" method="post"
     input type="password" name="password" placeholder="Password"/
     input type="submit" value="Log in"
 
-p
-    a href="register" Register
+- if @failed
+    p style="color: red; text-decoration: underline;" Login failed

@@ -8,4 +8,6 @@ h2 Discography
 h2 Associated genres
 - @genres.each do |genre|
     p
-        a href="../albums?genres%5B%5D=#{genre['id']}" #{genre["name"]}
+        a href="../albums?genres%5B%5D=#{genre["id"]}" #{genre["name"]}
+
+== slim :"partials/edit-button", locals: {id: @artist["id"]}

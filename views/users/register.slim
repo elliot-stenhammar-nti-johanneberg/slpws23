@@ -5,5 +5,5 @@ form action="/register" method="post"
     input type="password" name="password_repeat" placeholder="Repeat password"/
     input type="submit" value="Register"
 
-p
-    a href="login" Login
+- if @password_mismatch
+    p style="color: red; text-decoration: underline;" Password mismatch

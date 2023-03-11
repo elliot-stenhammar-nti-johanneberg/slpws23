@@ -1,8 +1,21 @@
 body {
-    margin: 0;
+    background-color: #f0f0f2;
 }
 
-a:visited {
-    color: blue;
+a:link, a:visited {
+    color: #38488f;
 }
   
+nav {
+    display: flex;  
+    justify-content: space-evenly;
+}
+
+.edit, .delete, .new, .logout {
+    position: absolute;
+    bottom: 8px;
+}
+
+.logout {
+    right: 8px;
+}

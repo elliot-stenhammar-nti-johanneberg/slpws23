@@ -5,6 +5,18 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"/
     meta http-equiv="X-UA-Compatible" content="ie=edge"/
     link rel="stylesheet" type="text/css" href="/css/style.css"/
-    title Document
+    title Music database
   body 
+  nav 
+    a href="/albums" Albums
+    a href="/genres" Genres
+    - if session[:user].nil?
+      a href="/login" Login
+      a href="/register" Register
+  hr
     ==yield
+
+  - if !session[:user].nil?
+    form.logout action="/logout" method="post"
+      input type="submit" value="Logout"
+

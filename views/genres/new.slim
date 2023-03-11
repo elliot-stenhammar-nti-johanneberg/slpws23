@@ -1,4 +1,8 @@
 h1 Add genre
 form action="/genres" method="post"
-    input type="text" name="name" placeholder="Name"/
+    input type="text" name="name" placeholder="Name"
+    select name="parent_genre_id"
+        option Select parent genre
+        - @genres.each do |genre|
+            option value=genre["id"] #{genre["name"]}
     input type="submit" value="Add genre"
