@@ -1,0 +1,7 @@
+app.rb 4da233b1e386a6ef1bebaffa200cb0add944c5e2
+lib/model.rb 3a9d00448055e3bfcba54e261b76f6e8bb5d5df5
+routes/albums.rb 199196b2569340edce6f2f55f9a7552f631d27c0
+routes/artists.rb 6ba82f4b5a895d0ceeedc160fe78bb1318819e65
+routes/genres.rb 5bb04ec2ead4ef05f26e292f5befa091485e4838
+routes/ratings.rb acd3dfefbafe0c12ee934ef3a9d59bf41a0d7ad1
+routes/users.rb f42dd96f4a82b4933db19fbf6b922685011fca85

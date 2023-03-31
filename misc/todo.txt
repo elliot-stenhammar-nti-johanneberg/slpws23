@@ -3,3 +3,6 @@ Functionality:
 
 General
 - Error handling/validation
+
+Issues:
+- Cannot add genre with NULL as parent_genre_id 

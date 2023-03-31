@@ -29,7 +29,7 @@ form action="/albums" method="get"
 ol
   - @albums.each do |album|
     li 
-        a href="albums/#{album["id"]}" #{album["title"]}
+        a href="albums/#{album['id']}" #{album["title"]}
 
 - if !session[:user].nil? && session[:user]["permission"] >= 1
     div.new

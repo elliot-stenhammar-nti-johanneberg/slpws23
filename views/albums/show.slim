@@ -1,8 +1,12 @@
 h1 #{@album["title"]}
-form#rating-form action="/ratings#{@rating.nil? ? nil : '/' + @rating['id'].to_s + '/update'}" method="post"    
-    label My rating: 
-    input#rating-input type="number" name="rating" min="1" max="5" value="#{@rating.nil? ? '' : @rating['rating']}"
-    input type="hidden" name="album_id" value=@album["id"]
+- if !session[:user].nil?
+    form#rating-form action="/ratings#{@user_rating.nil? ? nil : '/' + @user_rating['id'].to_s + '/update'}" method="post"    
+        label My rating: 
+        input#rating-input type="number" name="rating" min="1" max="5" value="#{@user_rating.nil? ? '' : @user_rating['rating']}"
+        input type="hidden" name="album_id" value=@album["id"]
+
+h2 Community rating: #{@album_rating["AVG(rating)"]}
+
 
 h2 Artist 
 a href="../artists/#{@album["artist_id"]}" #{@album["name"]}
