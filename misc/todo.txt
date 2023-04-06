@@ -3,6 +3,12 @@ Functionality:
 
 General
 - Error handling/validation
+    - Check if username already exists before adding user
+    - Check user permission before adding/updating/deleting albums/artists/genres
 
 Issues:
 - Cannot add genre with NULL as parent_genre_id 
+
+Other:
+    - Weekly logs
+    - Update ER-diagram

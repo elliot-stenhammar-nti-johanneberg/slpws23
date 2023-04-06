@@ -383,7 +383,7 @@ end
 
 module Helper
     
-    # Gets average rating value of album by id
+    # Checks if user's permission level exceeds threshold and if not executes yield function 
     #
     # @param permission_level [Integer] Permission threshold 
     # @yield [Block] Funciton to execute if permission not granted
