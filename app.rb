@@ -3,9 +3,6 @@ require 'slim'
 require 'sqlite3'
 require 'bcrypt'
 
-require_relative 'lib/request_limiter.rb'
-use RequestLimiter, cooldown: 0.1 # seconds
-
 require_relative 'lib/model.rb'
 include Database
 include Helper
@@ -21,4 +18,8 @@ enable :sessions
 # Landing page
 get('/')  do
   slim(:home)
+end
+
+get('/cooldown') do
+  "<h1>Too many login attemps</h1>"
 end

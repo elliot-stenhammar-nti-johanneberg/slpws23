@@ -347,7 +347,7 @@ module Database
         sql = <<-SQL
             UPDATE ratings
             SET rating = ?
-            WHERE id = ?, user_id = ?
+            WHERE id = ? AND user_id = ?
         SQL
         DB.execute(sql, rating, id, session[:user]["id"])
     end

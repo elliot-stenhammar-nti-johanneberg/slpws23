@@ -31,7 +31,9 @@ end
 #
 # @param :username [String] Username  
 # @param :password [String] Password  
+login_attempts = {}
 post('/login') do 
+  
   username, password = params[:username], params[:password]
   user = get_user_by_username(username) 
   if !user.nil?
@@ -40,7 +42,17 @@ post('/login') do
       redirect("/albums")
     end
   end
-  redirect("/login?failed=true")
+
+  
+  # Cooldown
+  if login_attempts[request.ip] && (Time.now.to_i - login_attempts[request.ip].last) < 5
+    redirect("/cooldown")
+  else
+    login_attempts[request.ip] ||= []
+    login_attempts[request.ip] << Time.now.to_i
+    redirect("/login?failed=true")
+  end
+
 end
 
 # Logout user
