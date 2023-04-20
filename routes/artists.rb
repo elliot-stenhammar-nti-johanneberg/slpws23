@@ -39,6 +39,8 @@ end
 #
 # @param :id [Integer] Artist ID
 post('/artists/:id/delete') do
+  if_permission_not(1) { redirect("/") }
+
   id = params[:id]
   delete_artist(id)
   redirect("/albums")
@@ -49,6 +51,8 @@ end
 # @param :id [Integer] Artist ID
 # @param :name [String] Artist name
 post('/artists/:id/update') do 
+  if_permission_not(1) { redirect("/") }
+  
   id, name = params[:id].to_i, params["name"]
   update_artist(id, name)
   redirect("/artists/#{id}")

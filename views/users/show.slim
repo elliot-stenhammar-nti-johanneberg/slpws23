@@ -1,0 +1,13 @@
+h1 User: #{session[:user]["username"]}
+
+a href="users/edit" Edit
+
+h2 Ratings
+table
+    th Album
+    th Rating
+    - @ratings.each do |rating|
+        tr
+            td 
+                a href="/albums/#{rating["album_id"]}" #{rating["title"]}
+            td #{rating["rating"]}

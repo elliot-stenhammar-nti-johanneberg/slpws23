@@ -11,7 +11,6 @@ end
 # @param :password_repeat [String] Repeated password
 post('/register') do 
   username, password, password_repeat = params[:username], params[:password], params[:password_repeat]
-  # TODO: Check if username is taken
   if password != password_repeat
     redirect(("/register?password_mismatch=true"))
   end
@@ -47,5 +46,30 @@ end
 # Logout user
 post('/logout') do
   session.clear()
+  redirect("/")
+end
+
+get('/profile') do
+  if logged_in?()
+    @ratings = get_ratings_by_user_id(session[:user]["id"])
+    slim(:"users/show")
+  else 
+    redirect("/")
+  end
+end
+
+get('/users/edit') do
+  if logged_in?()
+    slim(:"users/edit")
+  else 
+    redirect("/")
+  end
+end
+
+#Update user
+post('/users/edit') do
+  username, password = params[:username], params[:password]
+  update_user(username, password)
+  session[:user]["username"] = username
   redirect("/")
 end

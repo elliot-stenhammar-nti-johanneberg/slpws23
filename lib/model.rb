@@ -346,10 +346,10 @@ module Database
     def update_rating(id, rating)
         sql = <<-SQL
             UPDATE ratings
-            SET rating = #{rating}
-            WHERE id = #{id}
+            SET rating = ?
+            WHERE id = ?, user_id = ?
         SQL
-        DB.execute(sql)
+        DB.execute(sql, rating, id, session[:user]["id"])
     end
 
     # Gets all genres sorted alphabetically
@@ -379,6 +379,34 @@ module Database
         SQL
         return DB.execute(sql).first
     end
+
+    def update_user(username, password)
+        if password.empty?
+            sql = <<-SQL 
+                UPDATE users
+                SET username = ?
+                WHERE id = ?
+            SQL
+            DB.execute(sql, username, session[:user]["id"])
+        else 
+            sql = <<-SQL 
+                UPDATE users
+                SET username = ?, password_digest = ?
+                WHERE id = ?
+            SQL
+            DB.execute(sql, username, BCrypt::Password.create(password), session[:user]["id"])
+        end
+    end
+
+    def get_ratings_by_user_id(id)
+        sql = <<-SQL 
+            SELECT ratings.*, albums.title
+            FROM ratings
+                INNER JOIN albums ON albums.id = ratings.album_id 
+            WHERE user_id = ?
+        SQL
+        return DB.execute(sql, id)
+    end
 end
 
 module Helper
@@ -391,5 +419,9 @@ module Helper
     if request.session[:user].nil? || request.session[:user]["permission"] < permission_level
         yield
     end
+    end
+
+    def logged_in?()
+        return !session[:user].nil?
     end
 end

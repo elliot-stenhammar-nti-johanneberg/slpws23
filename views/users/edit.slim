@@ -1,0 +1,7 @@
+h1 Edit user
+form action="/users/edit" method="post"
+    input type="text" name="username" placeholder="Username" value=session[:user]["username"]
+    input type="text" name="password" placeholder="New password (optional)"
+    br
+    br
+    input type="submit" value="Save changes"

@@ -67,6 +67,8 @@ end
 # 
 # @param :id [Integer] Album ID
 post('/albums/:id/delete') do
+  if_permission_not(1) { redirect("/") }
+
   id = params[:id]
   delete_album(id)
   redirect("/albums")
@@ -80,6 +82,8 @@ end
 # @param :year [Integer] Year published
 # @param :genres [Array<Integer>] Array of genre ids
 post('/albums/:id/update') do
+  if_permission_not(1) { redirect("/") }
+  
   id, title, artist, year, genres = params[:id], params[:title], params[:artist], params[:year], params[:genres]
   update_album(id, title, artist, year, genres)
   redirect("/albums/#{id}")

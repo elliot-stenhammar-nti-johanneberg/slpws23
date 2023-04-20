@@ -13,6 +13,8 @@ html lang="en"
     - if session[:user].nil?
       a href="/login" Login
       a href="/register" Register
+    - else
+      a href="/profile" Profile
   hr
     ==yield
 
