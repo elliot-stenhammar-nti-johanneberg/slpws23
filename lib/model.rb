@@ -407,6 +407,15 @@ module Database
         SQL
         return DB.execute(sql, id)
     end
+
+    def username_unique?(username)
+        sql = <<-SQL 
+            SELECT *
+            FROM users
+            WHERE username = ?
+        SQL
+        return DB.execute(sql, username).empty?
+    end
 end
 
 module Helper

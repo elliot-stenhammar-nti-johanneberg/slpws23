@@ -5,5 +5,7 @@ form action="/register" method="post"
     input type="password" name="password_repeat" placeholder="Repeat password"/
     input type="submit" value="Register"
 
+- if @username_not_unique
+    p style="color: red; text-decoration: underline;" Username already taken
 - if @password_mismatch
     p style="color: red; text-decoration: underline;" Password mismatch

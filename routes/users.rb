@@ -1,6 +1,7 @@
 # Display register form
 get('/register') do 
     @password_mismatch = params[:password_mismatch].nil? ? false : params[:password_mismatch]
+    @username_not_unique = params[:username_not_unique].nil? ? false : params[:username_not_unique]
     slim(:"users/register")
 end
 
@@ -11,7 +12,11 @@ end
 # @param :password_repeat [String] Repeated password
 post('/register') do 
   username, password, password_repeat = params[:username], params[:password], params[:password_repeat]
-  if password != password_repeat
+
+  if !username_unique?(username)
+    redirect(("/register?username_not_unique=true"))
+  end
+  if password != password_repeat 
     redirect(("/register?password_mismatch=true"))
   end
   password_digest = BCrypt::Password.create(password)
@@ -33,7 +38,6 @@ end
 # @param :password [String] Password  
 login_attempts = {}
 post('/login') do 
-  
   username, password = params[:username], params[:password]
   user = get_user_by_username(username) 
   if !user.nil?
@@ -45,7 +49,7 @@ post('/login') do
 
   
   # Cooldown
-  if login_attempts[request.ip] && (Time.now.to_i - login_attempts[request.ip].last) < 5
+  if login_attempts[request.ip] && (Time.now.to_i - login_attempts[request.ip].last) < 1
     redirect("/cooldown")
   else
     login_attempts[request.ip] ||= []
